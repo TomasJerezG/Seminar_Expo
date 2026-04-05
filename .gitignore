@@ -1,0 +1,13 @@
+# logs
+*.log
+
+# fonts
+*.ttf
+
+# beamer / latex
+*.aux
+*.out
+*.nav
+*.snm
+*.toc
+*.pdf

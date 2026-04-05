@@ -1,0 +1,55 @@
+
+% Configuraciones generales de Beamer, la template y otros...
+
+% Quita los controles default de Beamer
+\setbeamertemplate{navigation symbols}{}
+
+% --- Colores beamer ---
+\setbeamercolor{normal text}      {fg=unalDk1}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{itemize item}     {fg=unalAcc5}
+\setbeamercolor{enumerate item}   {fg=unalAcc5}
+\setbeamercolor{footlinecolor}    {fg=unalBg2,bg=unalAcc1}
+
+\setbeamertemplate{itemize item}  {\textcolor{unalAcc5}{\textbullet}}
+\setbeamertemplate{enumerate item}{\textcolor{unalAcc5}{\insertenumlabel.}}
+
+% --- Headline (base) ---
+% Los espacios de margen de las lineas son aprox. 3.5% horizontalmente y 5% verticalmente.
+% El tamaño del 'bloque' al final de la línea aprox. 19% horizontalmente y 1.5% verticalmente.
+% Según las imágenes de 'referencia' de la plantilla
+\setbeamertemplate{headline}
+{%
+    \vspace*{0.03\paperheight}
+    \hspace*{0.035\paperwidth}\makebox[\textwidth][l]{\color{unalAcc1}\AncizarSansLight\fontsize{10pt}{12pt}\insertslidenumber{}}
+    \hspace*{0.035\paperwidth}{\color{unalAcc2} \rule[-0.01\paperheight]{0.93\paperwidth}{0.7pt}}
+    \hspace*{0.775\paperwidth}{\color{unalAcc2} \rule{0.19\paperwidth}{0.013\paperheight}}
+}
+
+% --- Footline ---
+% El tamaño del pie de linea aprox. 10.8% de altura.
+\setbeamertemplate{footline}
+{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=0.08\paperheight]{footlinecolor}
+        \begin{columns}
+            \begin{column}{0.7\paperwidth}
+                {\AncizarSansItalic{\fontsize{10pt}{12pt}{Facultad de \Facultad}}}\\
+                {\AncizarSansItalic{\fontsize{10pt}{12pt}{Sede \Sede}}}
+                \vspace*{5pt}
+            \end{column}
+            \begin{column}{0.1\paperwidth}
+                bye
+            \end{column}
+        \end{columns}
+    \end{beamercolorbox}
+}
+
+% --- Title / Subtitle ---
+\setbeamertemplate{frametitle}
+{%
+    \vspace*{-0.02\paperheight}
+    \fontsize{18pt}{20pt}
+    {\color{unalAcc1} \AncizarSerifEB{\insertframetitle{}}} \\
+    \fontsize{10pt}{12pt}
+    {\color{unalAcc1} \AncizarSansLight{\MakeUppercase{\insertframesubtitle{}}}}
+}
