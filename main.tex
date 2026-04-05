@@ -3,15 +3,23 @@
 %  Presentación — Plantilla Modelo Morado UNAL 2024
 % ============================================================
 
-\documentclass[aspectratio=169, 12pt]{beamer}
+\documentclass[aspectratio=169,12pt]{beamer}
 
 \input{config/packages}
 \input{config/colors}
 \input{config/data}
 \input{config/fonts}
 \input{config/template}
+\input{config/slides.tex}
 
 \begin{document} 
+\SlideFrontCover{}
+\begin{SlideTitle}
+    \begin{FlushRight}
+        \AncizarSerif{Martín Steven Hernández Ortiz} \\
+        \AncizarSansLight{mahernandezor@unal.edu.co}
+    \end{FlushRight}
+\end{SlideTitle}
 \begin{frame}
     \frametitle{foobar title}
     \framesubtitle{subtitle}
@@ -28,5 +36,5 @@
         \item void
     \end{enumerate}
 \end{frame}
-
+\SlideBackCover{}
 \end{document}

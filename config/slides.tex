@@ -1,0 +1,114 @@
+
+% Slides predefinidas de la template
+
+\NewDocumentCommand{\SlideFrontCover}{}
+{{%
+    \setbeamercolor{background canvas}{bg=unalAcc1}
+    \setbeamertemplate{headline}
+    {%
+        \vspace*{0.025\paperheight}
+        \fontsize{8pt}{12pt}
+        \makebox[\textwidth][l]{\color{unalAcc1}\AncizarSansLight{0}}
+        \TMPTheaderline{}
+    }
+    \setbeamertemplate{footline}
+    {%
+        \TMPTfooterline{} 
+        \fontsize{8pt}{12pt}
+        \makebox[\textwidth][l]{\color{unalAcc1}\AncizarSansLight{0}}
+        \vspace*{0.025\paperheight}
+    }
+    \begin{frame}[noframenumbering]
+        \vspace*{\fill}
+        \begin{figure}
+            \centering
+            hello
+        \end{figure}
+        \vfill
+    \end{frame}
+}}
+
+\NewDocumentCommand{\SlideBackCover}{}
+{%
+    \setbeamercolor{background canvas}{bg=unalAcc1}
+    \setbeamertemplate{headline}
+    {%
+        \vspace*{0.025\paperheight}
+        \fontsize{8pt}{12pt}
+        \makebox[\textwidth][l]{\color{unalAcc1}\AncizarSansLight{0}}
+        \TMPTheaderline{}
+    }
+    \setbeamertemplate{footline}
+    {%
+        \TMPTfooterline{} 
+        \fontsize{8pt}{12pt}
+        \makebox[\textwidth][l]{\color{unalAcc1}\AncizarSansLight{0}}
+        \vspace*{0.025\paperheight}
+    }
+    \begin{frame}[noframenumbering]
+        \vspace*{\fill}
+        \centering
+        \fontsize{32}{36}
+        \color{unalBg2}
+        \AncizarSerif{Gracias}
+        \vfill
+        \centering
+        \fontsize{14}{18}
+        \color{unalBg2}
+        \AncizarSansItalic{Universidad Nacional de Colombia}
+        \vfill
+    \end{frame}
+}
+
+\NewDocumentEnvironment{SlideTitle}{+b}
+{{%
+    \setbeamertemplate{headline}
+    {%
+        \vspace*{0.025\paperheight}
+        \fontsize{8pt}{12pt}
+        \color{unalBg2}
+        \hspace*{0.035\paperwidth}\makebox[\textwidth][l]{\AncizarSansLight{\insertslidenumber{}}}
+        \TMPTheaderline{}
+    }
+    \setbeamertemplate{footline}
+    {%
+        \begin{beamercolorbox}[wd=\paperwidth,ht=0.08\paperheight]{footlinecolor}
+            \begin{columns}
+                \begin{column}{0.7\paperwidth}
+                    \fontsize{8pt}{8.75pt}
+                    \color{unalDk2}
+                    \AncizarSansItalic{Facultad de \Facultad} \\
+                    \AncizarSansItalic{Sede \Sede}
+                    \vspace*{5pt}
+                \end{column}
+                \begin{column}{0.1\paperwidth}
+                    bye
+                \end{column}
+            \end{columns}
+        \end{beamercolorbox}
+    }
+    \setbeamertemplate{frametitle}
+    {%
+        \vspace*{\fill}%
+        \centering
+        \fontsize{32pt}{36pt}%
+        \color{unalAcc1}%
+        \AncizarSerif{\insertframetitle{}} \\
+        \fontsize{18pt}{18pt}%
+        \color{unalAcc4}%
+        \AncizarSansItalic{\insertframesubtitle{}}
+        {%
+            \color{unalAcc1}
+            \rule{0.8\textwidth}{1pt} \\
+        }
+        \fontsize{14pt}{16pt}%
+        \color{unalAcc1}%
+        \AncizarSerif{Facultad de \Facultad-\Departamento-Sede \Sede}
+        \vfill
+    }
+    \begin{frame}[noframenumbering]{\Titulo}{\Subtitulo}
+        \fontsize{8pt}{8.75pt}
+        \color{unalDk1}
+        #1
+    \end{frame}
+}}{}
