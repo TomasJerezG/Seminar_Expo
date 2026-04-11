@@ -10,13 +10,34 @@
 \setbeamercolor{itemize item}     {fg=unalAcc5}
 \setbeamercolor{enumerate item}   {fg=unalAcc5}
 
+\setbeamercolor{block title}      {fg=unalAcc1} % Por default, pero se cambia según el env
+\setbeamerfont{block title}       {series=\bfseries}
+
 \setbeamercolor{headerline}       {bg=unalAcc2}
 \setbeamercolor{footerline}       {bg=unalAcc4}
 
+\setbeamercolor{section in toc}   {fg=unalAcc1}
+
 \setbeamercolor{footlinecolor}    {fg=unalBg2,bg=unalDk2}
+
 
 \setbeamertemplate{itemize item}  {\textcolor{unalAcc5}{\textbullet}}
 \setbeamertemplate{enumerate item}{\textcolor{unalAcc5}{\insertenumlabel.}}
+
+\setbeamertemplate{frametitle continuation} {}
+
+\renewcommand{\qedsymbol}{\textcolor{unalAcc1}{\ensuremath{\blacksquare}}}
+
+\setlist[enumerate]{%
+    font=\color{unalAcc1},%
+    leftmargin=1cm%
+}
+\setlist[itemize]{%
+  label=\usebeamerfont*{itemize item}
+        \usebeamercolor[fg]{itemize item}
+        \usebeamertemplate{itemize item}
+}
+
 
 % --- Headline (base) ---
 % Los espacios de margen de las lineas son aprox. 3.5% horizontalmente y 5% verticalmente.
@@ -54,14 +75,14 @@
     \begin{beamercolorbox}[wd=\paperwidth,ht=0.08\paperheight]{footlinecolor}
         \begin{columns}
             \begin{column}{0.7\paperwidth}
-                \fontsize{8pt}{8.75pt}
-                \color{unalBg2}%
-                \AncizarSansItalic{Facultad de \Facultad} \\
-                \AncizarSansItalic{Sede \Sede}
-                \vspace*{5pt}
+                {%
+                    \fontsize{8pt}{8.75pt}\color{unalBg2}%
+                    \AncizarSansItalic{Facultad de \Facultad} \\%
+                    \AncizarSansItalic{Sede \Sede}
+                    \vspace*{5pt}
+                }
             \end{column}
             \begin{column}{0.1\paperwidth}
-                bye
             \end{column}
         \end{columns}
     \end{beamercolorbox}

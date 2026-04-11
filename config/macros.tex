@@ -1,0 +1,114 @@
+
+% Fast Set 
+\NewDocumentCommand{\fset}{m}{\ensuremath{%
+    \left\{ #1 \right\}%
+}}
+
+% Fast Pair of elements
+\NewDocumentCommand{\fpair}{mm}
+{\ensuremath{%
+    \left(#1, #2\right)
+}}
+
+% Fast Power Set
+\NewDocumentCommand{\fpows}{m}
+{\ensuremath{%
+    \symscr{P}\left(#1\right)%
+}}
+
+\NewDocumentCommand{\ffunc}{mom}{\ensuremath{%
+    #1%
+    \IfValueTF{#2}{%
+        \upharpoonright_{#2}
+    }{}%
+    \left( #3 \right) %
+}}
+\NewDocumentCommand{\ffuncp}{mom}{\ensuremath{%
+    \left(#1\right)%
+    \IfValueTF{#2}{%
+        \upharpoonright_{#2}
+    }{}%
+    \left( #3 \right) %
+}}
+
+\newtheorem{TMPMathDefinition}{Definición}
+\RenewDocumentEnvironment{definition}{+b} {%
+    \begin{tcolorbox}[
+            colframe=unalAcc2,
+            colback=unalBg2,
+            top=0.5ex,
+            bottom=0.5ex,
+            left=0.5ex,
+            right=0.5ex,
+        ]%
+        \setbeamercolor{block title}{fg=unalAcc2}
+        \begin{TMPMathDefinition}%
+            #1 %
+            \hspace{\fill}\(\bigtriangleup\)%
+        \end{TMPMathDefinition}%
+    \end{tcolorbox}%
+    \setbeamercolor{block title}{fg=unalAcc1}
+} {}
+
+% Fast Set of Numbers 
+\def\nsN{\ensuremath{\mathbb{N}}} % Natural
+\def\nsZ{\ensuremath{\mathbb{Z}}} % Integer
+\def\nsQ{\ensuremath{\mathbb{Q}}} % Rational
+\def\nsI{\ensuremath{\mathbb{I}}} % Irational
+\def\nsR{\ensuremath{\mathbb{R}}} % Real
+\def\nsC{\ensuremath{\mathbb{C}}} % Complex
+
+% Document Proposition, Theorems, Lemmas and Colloraries
+
+% Theorems
+\newtheorem{TMPMathTheorem}{Teorema}
+\RenewDocumentEnvironment{theorem}{+b} {%
+    \begin{tcolorbox}[
+            colframe=unalAcc1,
+            colback=unalBg2,
+            top=0.5ex,
+            bottom=0.5ex,
+            left=0.5ex,
+            right=0.5ex,
+        ]%
+        \setbeamercolor{block title}{fg=unalAcc1}
+        \begin{TMPMathTheorem}%
+            #1 %
+        \end{TMPMathTheorem}%
+    \end{tcolorbox}%
+} {}
+
+% Proposition
+\newtheorem{TMPMathProposition}[TMPMathTheorem]{Proposición}
+\NewDocumentEnvironment{proposition}{+b} {%
+    \begin{TMPMathProposition}%
+        #1 %
+    \end{TMPMathProposition}%
+} {}
+
+% Lemma
+\newtheorem{TMPMathLemma}[TMPMathTheorem]{Lema}
+\RenewDocumentEnvironment{lemma}{+b} {%
+    \begin{tcolorbox}[
+            colframe=unalAcc1,
+            colback=unalBg2,
+            top=-1ex,
+            bottom=0.5ex,
+            left=0.5ex,
+            right=0.5ex,
+        ]%
+        \setbeamercolor{block title}{fg=unalAcc1}
+        \begin{TMPMathLemma}%
+            #1 %
+        \end{TMPMathLemma}%
+    \end{tcolorbox}%
+} {}
+
+% Collorary
+\newtheorem{TMPMathCorollary}[TMPMathTheorem]{Corolario}
+\RenewDocumentEnvironment{corollary}{+b} {%
+    \begin{TMPMathCorollary}%
+        #1 %
+    \end{TMPMathCorollary}%
+} {}
+
