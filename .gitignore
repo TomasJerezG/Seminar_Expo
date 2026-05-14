@@ -4,6 +4,8 @@
 # fonts
 *.ttf
 
+*.png
+
 # beamer / latex
 *.aux
 *.out
@@ -11,12 +13,12 @@
 *.snm
 *.toc
 *.pdf
-.bbl
-.bcf
-.bcf-SAVE-ERROR
-.blg
-.fdb_latexmk
-.fls
-.run.xml
-.synctex.gz
-.xdv
+*.bbl
+*.bcf
+*.bcf-SAVE-ERROR
+*.blg
+*.fdb_latexmk
+*.fls
+*.run.xml
+*.synctex.gz
+*.xdv
