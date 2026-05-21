@@ -20,6 +20,7 @@
         \AncizarSansLight{tjerez@unal.edu.co}
     \end{FlushRight}
 \end{SlideTitle}
+
 \begin{frame}[t]
     \frametitle{Introducción a teoria de la Normalización}
     \framesubtitle{Historia y conceptos básicos}
@@ -35,12 +36,24 @@
         \end{column}
     \end{columns}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Introducción a teoria de la Normalización}
+    \framesubtitle{Tipos de Llaves}
+    \begin{itemize}
+        \item Superclave: cualquier conjunto de atributos que identifica unicamente una fila en una tabla.
+        \item Clave candidata: una superclave mínima, si se le quita algun atributo esta deja de identificar unicamente una fila.
+        \item Clave primaria: la clave candidata elegida por el diseñador de la base de datos para identificar unicamente cada fila en una tabla.
+    \end{itemize}
+\end{frame}
+
 \begin{frame}
     \frametitle{Introducción a teoria de la Normalización}
     \framesubtitle{Que es la Normalización?}
     La normalización es un proceso que se utiliza en el diseño de bases de datos para eliminar la redundancia y prevenir anomalías en las operaciones de inserción, actualización y eliminación. \\
     Esto es logrado al descomponer las relaciones grandes en relaciones más pequeñas y bien estructuradas, siguiendo un conjunto de reglas conocidas como formas normales. \\
 \end{frame}
+
 \begin{frame}
     \frametitle{Introducción a teoria de la Normalización}
     \framesubtitle{Formas Normales}
@@ -52,7 +65,12 @@
         \item Forma Normal de Boyce-Codd (BCNF): Requiere que una tabla esté en 3NF y que para toda dependencia funcional no trivial X -> Y, X sea una superclave.
         \item Cuarta Forma Normal (4NF): Requiere que una tabla esté en BCNF y que no haya dependencias multivaluadas no triviales.
     \end{itemize}
-    
 \end{frame}
+
+\begin{frame}
+    \frametitle{Preliminares}
+    \framesubtitle{Lenguaje y notación}
+\end{frame}
+
 \SlideBackCover{}
 \end{document}
