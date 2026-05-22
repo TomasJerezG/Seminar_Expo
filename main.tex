@@ -70,7 +70,30 @@
 \begin{frame}
     \frametitle{Preliminares}
     \framesubtitle{Lenguaje y notación}
+    \begin{itemize}
+        \item Tomaremos $\mathcal{U}$ como el conjunto finito de atributos.
+        \item El conjunto $\mathcal{F}$ representa las dependencias funcionales (FDs) sobre U.
+        \item $\Sigma$ el conjunto de dependencias incluyendo las dependencias multivaluadas tal que $\mathcal{F} \subseteq \Sigma$
+    \end{itemize}
 \end{frame}
 
+
+\begin{frame}
+    \frametitle{Dependencias Funcionales y Multivaluadas}
+    \framesubtitle{Definiciones}
+
+    \begin{block}{Dependencia Funcional (FD)}
+        Una expresión de la forma $X \rightarrow Y$ donde $X, Y \subseteq \mathcal{U}$. \\
+        Dada una relación $R$ sobre $\mathcal{U}$, escribimos $R \vDash X \rightarrow Y$ si para todo $t_1, t_2 \in R$:
+        \[t_1[X] = t_2[X] \implies t_1[Y] = t_2[Y]\]
+    \end{block}
+
+
+    \begin{block}{Dependencia Multivaluada (MVD)}
+        Una expresión de la forma $X \twoheadrightarrow Y$ donde $X, Y \subseteq \mathcal{U}$. \\
+        Sea $Z := \mathcal{U} - (X \cup Y)$. Escribimos $R \vDash X \twoheadrightarrow Y$ si para todo $t_1, t_2 \in R$ con $t_1[X] = t_2[X]$, existe un $t_3 \in R$ tal que:
+        \[t_3[X] = t_1[X], \quad t_3[Y] = t_1[Y], \quad \text{y} \quad t_3[Z] = t_2[Z]\]
+    \end{block}
+\end{frame}
 \SlideBackCover{}
 \end{document}
