@@ -39,6 +39,13 @@
 
 \begin{frame}
     \frametitle{Introducción a teoria de la Normalización}
+    \framesubtitle{Que es la Normalización?}
+    La normalización es un proceso que se utiliza en el diseño de bases de datos para eliminar la redundancia y prevenir anomalías en las operaciones de inserción, actualización y eliminación. \\
+    Esto es logrado al descomponer las relaciones grandes en relaciones más pequeñas y bien estructuradas, siguiendo un conjunto de reglas conocidas como formas normales. \\
+\end{frame}
+
+\begin{frame}
+    \frametitle{Introducción a teoria de la Normalización}
     \framesubtitle{Tipos de Llaves}
     \begin{itemize}
         \item Superclave: cualquier conjunto de atributos que identifica unicamente una fila en una tabla.
@@ -47,12 +54,6 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Introducción a teoria de la Normalización}
-    \framesubtitle{Que es la Normalización?}
-    La normalización es un proceso que se utiliza en el diseño de bases de datos para eliminar la redundancia y prevenir anomalías en las operaciones de inserción, actualización y eliminación. \\
-    Esto es logrado al descomponer las relaciones grandes en relaciones más pequeñas y bien estructuradas, siguiendo un conjunto de reglas conocidas como formas normales. \\
-\end{frame}
 
 \begin{frame}
     \frametitle{Introducción a teoria de la Normalización}
@@ -81,19 +82,125 @@
 \begin{frame}
     \frametitle{Dependencias Funcionales y Multivaluadas}
     \framesubtitle{Definiciones}
+    
+    \small
 
     \begin{block}{Dependencia Funcional (FD)}
-        Una expresión de la forma $X \rightarrow Y$ donde $X, Y \subseteq \mathcal{U}$. \\
+        Una expresión de la forma $X \rightarrow Y$ donde $X, Y \subseteq \mathcal{U}$.
         Dada una relación $R$ sobre $\mathcal{U}$, escribimos $R \vDash X \rightarrow Y$ si para todo $t_1, t_2 \in R$:
         \[t_1[X] = t_2[X] \implies t_1[Y] = t_2[Y]\]
     \end{block}
 
-
     \begin{block}{Dependencia Multivaluada (MVD)}
-        Una expresión de la forma $X \twoheadrightarrow Y$ donde $X, Y \subseteq \mathcal{U}$. \\
+        Una expresión de la forma $X \twoheadrightarrow Y$ donde $X, Y \subseteq \mathcal{U}$.
         Sea $Z := \mathcal{U} - (X \cup Y)$. Escribimos $R \vDash X \twoheadrightarrow Y$ si para todo $t_1, t_2 \in R$ con $t_1[X] = t_2[X]$, existe un $t_3 \in R$ tal que:
         \[t_3[X] = t_1[X], \quad t_3[Y] = t_1[Y], \quad \text{y} \quad t_3[Z] = t_2[Z]\]
     \end{block}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Implicación semántica entre conjuntos de atributos}
+    \framesubtitle{Definiciones}
+    Dados $X, Y \subseteq \mathcal{U}$. Escribimos $X \vDash_{\mathcal{F}} Y$ si para toda relación $R$ sobre $\mathcal{U}$ que satisface $\mathcal{F}$, se cumple que para cualesquiera tuplas $t_1, t_2 \in R$:
+    \[ t_1[X] = t_2[X] \implies t_1[Y] = t_2[Y] \]
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Operador de Clausura}
+    \framesubtitle{Definiciones}
+
+    Sea $\mathcal{F}$ un conjunto de dependencias funcionales sobre $\mathcal{U}$. El operador de clausura inducido por $\mathcal{F}$ es la función:
+    \[ \mathrm{cl}_{\mathcal{F}} : \mathcal{P}(\mathcal{U}) \rightarrow \mathcal{P}(\mathcal{U}) \]
+
+    definido por:
+    \[ \mathrm{cl}_{\mathcal{F}}(X) := \{a \in \mathcal{U} \mid \mathcal{F} \vDash X \rightarrow \{a\} \} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Preorden de Especialización}
+    \framesubtitle{Definiciones}
+
+    Sea $\mathcal{U}$ un conjunto finito de atributos y $\mathrm{cl}_{\mathcal{F}}$ el operador de clausura inducido por $\mathcal{F}$. Definimos un preorden $\leq$ sobre $\mathcal{P}(\mathcal{U})$ como:
+    \[ X \leq Y \iff Y \subseteq \mathrm{cl}_{\mathcal{F}}(X) \]
+
+    Además, escribimos $X \sim Y$ si $X \leq Y$ y $Y \leq X$ (es decir, $\mathrm{cl}_{\mathcal{F}}(X) = \mathrm{cl}_{\mathcal{F}}(Y)$). 
+    
+    Denotamos al conjunto de clases de clausura equipado con el orden parcial inducido como:
+    \[ \mathbb{T}_{\mathcal{F}} := \mathcal{P}(\mathcal{U})/\sim \]
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Espacio de Alexandrov $T_0$ Finito}
+    \framesubtitle{Definiciones}
+
+    El conjunto cociente $\mathcal{P}(\mathcal{U})/\sim$ equipado con el orden parcial inducido por $\leq$ forma un \textbf{poset finito} (conjunto parcialmente ordenado). 
+    
+    \vspace{0.4cm}
+    
+    Equivalentemente, este poset define un \textbf{espacio topológico de Alexandrov finito}, cuyos conjuntos abiertos son los subconjuntos cerrados hacia arriba (\textit{upward-closed}). 
+    
+    \vspace{0.4cm}
+    
+    Denotamos a este espacio $T_0$ finito como:
+    \[ \mathbb{T}_{\mathcal{F}} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Diagrama de Hasse}
+    \framesubtitle{Definiciones}
+
+    Sea $\mathbb{T}_{\mathcal{F}} := \mathcal{P}(\mathcal{U})/\sim$ equipado con el orden parcial $\leq$, y sea $<$ su parte estricta. 
+    
+    El \textbf{diagrama de Hasse} de $\mathbb{T}_{\mathcal{F}}$ es el grafo dirigido acíclico donde:
+    \begin{itemize}
+        \item \textbf{Vértices:} Las clases de equivalencia $[X] \in \mathbb{T}_{\mathcal{F}}$.
+        \item \textbf{Aristas:} Relaciones de cobertura. Existe una arista $[X] \rightarrow [Y]$ si y solo si:
+        \[ [X] < [Y] \quad \text{y no existe } [Z] \in \mathbb{T}_{\mathcal{F}} \text{ tal que } [X] < [Z] < [Y] \]
+    \end{itemize}
+
+    \vspace{0.3cm}
+    
+    Elementos extremos de $\mathbb{T}_{\mathcal{F}}$:
+    \[ \bot = [\mathcal{U}] \text{ (mínimo)}, \qquad \top = [\mathrm{cl}_{\mathcal{F}}(\emptyset)] \text{ (máximo)} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Superclaves y Claves Candidatas}
+    \framesubtitle{Definiciones}
+
+    Un subconjunto $K \subseteq \mathcal{U}$ es una \textbf{superclave} si:
+    \[ \mathrm{cl}_{\mathcal{F}}(K) = \mathcal{U} \]
+    \textit{(Equivalentemente, $[K] = [\mathcal{U}]$ en $\mathbb{T}_{\mathcal{F}}$)}
+
+    \vspace{0.6cm}
+
+    Una \textbf{clave candidata} es una superclave que es mínima bajo inclusión. Es decir, una superclave $K$ tal que:
+    \[ \text{No existe un subconjunto propio } K' \subsetneq K \text{ que sea superclave} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Forma Normal de Boyce-Codd (BCNF)}
+    \framesubtitle{Definición}
+
+    Un esquema relacional $(\mathcal{U}, \mathcal{F})$ está en \textbf{Forma Normal de Boyce-Codd (BCNF)} si para toda dependencia funcional $X \rightarrow Y$ (con $X, Y \subseteq \mathcal{U}$) tal que:
+    \[ Y \subseteq \mathrm{cl}_{\mathcal{F}}(X) \quad \text{y} \quad Y \not\subseteq X \]
+    el determinante $X$ es una \textbf{superclave} (es decir, $\mathrm{cl}_{\mathcal{F}}(X) = \mathcal{U}$).
+\end{frame}
+
+\begin{frame}
+    \frametitle{Cuarta Forma Normal (4NF)}
+    \framesubtitle{Definición}
+
+    Sea $\Sigma$ un conjunto de dependencias (FDs y MVDs) sobre $\mathcal{U}$, y sea $\mathcal{F} \subseteq \Sigma$ el subconjunto de dependencias funcionales.
+    
+    \vspace{0.4cm}
+
+    Un esquema relacional $(\mathcal{U}, \Sigma)$ está en \textbf{Cuarta Forma Normal (4NF)} si para toda dependencia multivaluada $X \twoheadrightarrow Y$ (con $X, Y \subseteq \mathcal{U}$) tal que:
+    \[ \Sigma \vDash X \twoheadrightarrow Y \quad \text{y} \quad Y \not\subseteq X \quad \text{y} \quad X \cup Y \neq \mathcal{U} \]
+    el determinante $X$ es una \textbf{superclave}.
+\end{frame}
+
 \SlideBackCover{}
 \end{document}
