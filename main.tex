@@ -1,10 +1,6 @@
-
-% ============================================================
-%  Presentación — Plantilla Modelo Morado UNAL 2024
-% ============================================================
-
 \documentclass[aspectratio=169,12pt]{beamer}
-
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
 \input{config/packages}
 \input{config/colors}
 \input{config/data}
@@ -167,6 +163,35 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Ejemplo: Diagrama de Hasse de $\mathbb{T}_{\mathcal{F}}$}
+    \framesubtitle{$\mathcal{U} = \{A,B,C\}$, \quad $\mathcal{F} = \{A \rightarrow C,\ B \rightarrow C\}$}
+
+    \centering
+    \begin{tikzpicture}[
+        cl/.style  = {draw, rounded corners, minimum width=1.6cm, minimum height=0.6cm, font=\small, fill=gray!12},
+        ext/.style = {draw, rounded corners, minimum width=1.6cm, minimum height=0.6cm, font=\small, fill=red!18},
+        ar/.style  = {-{Stealth[length=1.8mm]}, semithick},
+        lbl/.style = {font=\footnotesize}
+    ]
+        \node[ext] (top) at (0,3)    {$\emptyset$};
+        \node[cl]  (C)   at (0,2)    {$\{C\}$};
+        \node[cl]  (AC)  at (-1.6,1) {$\{A,C\}$};
+        \node[cl]  (BC)  at (1.6,1)  {$\{B,C\}$};
+        \node[ext] (bot) at (0,0)    {$\{A,B,C\}$};
+
+        \draw[ar] (bot) -- (AC);
+        \draw[ar] (bot) -- (BC);
+        \draw[ar] (AC)  -- (C);
+        \draw[ar] (BC)  -- (C);
+        \draw[ar] (C)   -- (top);
+
+        \node[lbl, above=0.15cm of top] {$\top$ máximo $= [\mathrm{cl}_{\mathcal{F}}(\emptyset)]$};
+        \node[lbl, below=0.15cm of bot] {$\bot$ mínimo $= [\mathcal{U}]$};
+    \end{tikzpicture}
+    \vspace{0.3cm}
+\end{frame}
+
+\begin{frame}
     \frametitle{Superclaves y Claves Candidatas}
     \framesubtitle{Definiciones}
 
@@ -180,18 +205,10 @@
     \[ \text{No existe un subconjunto propio } K' \subsetneq K \text{ que sea superclave} \]
 \end{frame}
 
-\begin{frame}
-    \frametitle{Forma Normal de Boyce-Codd (BCNF)}
-    \framesubtitle{Definición}
-
-    Un esquema relacional $(\mathcal{U}, \mathcal{F})$ está en \textbf{Forma Normal de Boyce-Codd (BCNF)} si para toda dependencia funcional $X \rightarrow Y$ (con $X, Y \subseteq \mathcal{U}$) tal que:
-    \[ Y \subseteq \mathrm{cl}_{\mathcal{F}}(X) \quad \text{y} \quad Y \not\subseteq X \]
-    el determinante $X$ es una \textbf{superclave} (es decir, $\mathrm{cl}_{\mathcal{F}}(X) = \mathcal{U}$).
-\end{frame}
 
 \begin{frame}
     \frametitle{Cuarta Forma Normal (4NF)}
-    \framesubtitle{Definición}
+    \framesubtitle{Definiciones}
 
     Sea $\Sigma$ un conjunto de dependencias (FDs y MVDs) sobre $\mathcal{U}$, y sea $\mathcal{F} \subseteq \Sigma$ el subconjunto de dependencias funcionales.
     
@@ -200,6 +217,74 @@
     Un esquema relacional $(\mathcal{U}, \Sigma)$ está en \textbf{Cuarta Forma Normal (4NF)} si para toda dependencia multivaluada $X \twoheadrightarrow Y$ (con $X, Y \subseteq \mathcal{U}$) tal que:
     \[ \Sigma \vDash X \twoheadrightarrow Y \quad \text{y} \quad Y \not\subseteq X \quad \text{y} \quad X \cup Y \neq \mathcal{U} \]
     el determinante $X$ es una \textbf{superclave}.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Subconjunto Denso y Generador Denso Minimal}
+    \framesubtitle{Definiciones}
+
+    \small
+
+    \begin{block}{Subconjunto denso (\textit{dense subset})}
+        Un subconjunto $D \subseteq \mathcal{U}$ se llama \textbf{denso} (respecto a $\mathrm{cl}_{\mathcal{F}}$) si:
+        \[ \mathrm{cl}_{\mathcal{F}}(D) = \mathcal{U}. \]
+    \end{block}
+
+    \begin{block}{Generador denso minimal (\textit{minimal dense generator})}
+        Un \textbf{generador denso minimal} es un subconjunto denso que es minimal respecto a la inclusión.
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Claves como Generadores Topológicos}
+    \framesubtitle{Teorema}
+
+    \small
+
+    Sea $(\mathcal{U}, \mathcal{F})$ un esquema relacional finito y sea $\mathbb{T}_{\mathcal{F}}$ su espacio topológico $T_0$ finito asociado. Entonces:
+
+    \vspace{0.3cm}
+
+    \begin{enumerate}
+        \item[(i)] Un subconjunto $K \subseteq \mathcal{U}$ es una \textbf{superllave} si y solo si $K$ es \textbf{denso}.
+
+        \vspace{0.2cm}
+
+        \item[(ii)] Un subconjunto $K \subseteq \mathcal{U}$ es una \textbf{clave candidata} si y solo si $K$ es un \textbf{generador denso minimal}.
+
+        \vspace{0.2cm}
+
+        \item[(iii)] Las claves candidatas corresponden exactamente a los \textbf{generadores minimales} del conjunto $\mathrm{cl}_{\mathcal{F}}$-cerrado más grande, $\mathcal{U}$, en el retículo de clausura de $\mathrm{cl}_{\mathcal{F}}$ (es decir, el retículo de subconjuntos $\mathrm{cl}_{\mathcal{F}}$-cerrados de $\mathcal{U}$).
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Forma Normal de Boyce-Codd (BCNF)}
+    \framesubtitle{Definición}
+
+    Un esquema relacional $(\mathcal{U}, \mathcal{F})$ está en \textbf{Forma Normal de Boyce-Codd (BCNF)} si para toda dependencia funcional $X \rightarrow Y$ (con $X, Y \subseteq \mathcal{U}$) tal que:
+    \[ Y \subseteq \mathrm{cl}_{\mathcal{F}}(X) \quad \text{y} \quad Y \not\subseteq X \]
+    el determinante $X$ es una \textbf{superclave} (es decir, $\mathrm{cl}_{\mathcal{F}}(X) = \mathcal{U}$).
+\end{frame} 
+
+\begin{frame}
+    \frametitle{Región Cerrada Propia}
+    \framesubtitle{Definiciones}
+        Un subconjunto $C \subseteq \mathcal{U}$ se llama \textbf{región cerrada propia} si:
+        \[ \mathrm{cl}_{\mathcal{F}}(C) = C \qquad \text{y} \qquad C \subsetneq \mathcal{U}. \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Generador Propio}
+    \framesubtitle{Definiciones}
+
+    Sea $C \subseteq \mathcal{U}$ un conjunto $\mathrm{cl}_{\mathcal{F}}$-cerrado. 
+    
+    \vspace{0.4cm}
+    
+    Un subconjunto $X \subseteq \mathcal{U}$ es un \textbf{generador propio} de $C$ si:
+    \[ \mathrm{cl}_{\mathcal{F}}(X) = C \quad \text{y} \quad X \subsetneq C \]
+
 \end{frame}
 
 \SlideBackCover{}
