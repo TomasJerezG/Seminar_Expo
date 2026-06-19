@@ -205,20 +205,6 @@
     \[ \text{No existe un subconjunto propio } K' \subsetneq K \text{ que sea superclave} \]
 \end{frame}
 
-
-\begin{frame}
-    \frametitle{Cuarta Forma Normal (4NF)}
-    \framesubtitle{Definiciones}
-
-    Sea $\Sigma$ un conjunto de dependencias (FDs y MVDs) sobre $\mathcal{U}$, y sea $\mathcal{F} \subseteq \Sigma$ el subconjunto de dependencias funcionales.
-    
-    \vspace{0.4cm}
-
-    Un esquema relacional $(\mathcal{U}, \Sigma)$ está en \textbf{Cuarta Forma Normal (4NF)} si para toda dependencia multivaluada $X \twoheadrightarrow Y$ (con $X, Y \subseteq \mathcal{U}$) tal que:
-    \[ \Sigma \vDash X \twoheadrightarrow Y \quad \text{y} \quad Y \not\subseteq X \quad \text{y} \quad X \cup Y \neq \mathcal{U} \]
-    el determinante $X$ es una \textbf{superclave}.
-\end{frame}
-
 \begin{frame}
     \frametitle{Subconjunto Denso y Generador Denso Minimal}
     \framesubtitle{Definiciones}
@@ -259,15 +245,6 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Forma Normal de Boyce-Codd (BCNF)}
-    \framesubtitle{Definición}
-
-    Un esquema relacional $(\mathcal{U}, \mathcal{F})$ está en \textbf{Forma Normal de Boyce-Codd (BCNF)} si para toda dependencia funcional $X \rightarrow Y$ (con $X, Y \subseteq \mathcal{U}$) tal que:
-    \[ Y \subseteq \mathrm{cl}_{\mathcal{F}}(X) \quad \text{y} \quad Y \not\subseteq X \]
-    el determinante $X$ es una \textbf{superclave} (es decir, $\mathrm{cl}_{\mathcal{F}}(X) = \mathcal{U}$).
-\end{frame} 
-
-\begin{frame}
     \frametitle{Región Cerrada Propia}
     \framesubtitle{Definiciones}
         Un subconjunto $C \subseteq \mathcal{U}$ se llama \textbf{región cerrada propia} si:
@@ -285,6 +262,119 @@
     Un subconjunto $X \subseteq \mathcal{U}$ es un \textbf{generador propio} de $C$ si:
     \[ \mathrm{cl}_{\mathcal{F}}(X) = C \quad \text{y} \quad X \subsetneq C \]
 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Forma Normal de Boyce-Codd (BCNF)}
+    \framesubtitle{Definiciones}
+
+    Un esquema relacional $(\mathcal{U}, \mathcal{F})$ está en \textbf{Forma Normal de Boyce-Codd (BCNF)} si para toda dependencia funcional $X \rightarrow Y$ (con $X, Y \subseteq \mathcal{U}$) tal que:
+    \[ Y \subseteq \mathrm{cl}_{\mathcal{F}}(X) \quad \text{y} \quad Y \not\subseteq X \]
+    el determinante $X$ es una \textbf{superclave} (es decir, $\mathrm{cl}_{\mathcal{F}}(X) = \mathcal{U}$).
+\end{frame} 
+
+\begin{frame}
+    \frametitle{Ejemplo: Diagrama de Hasse de $\mathbb{T}_{\mathcal{F}}$ (Arreglado - BCNF)}
+    \framesubtitle{$\mathcal{U} = \{A,B,C\}$, \quad $\mathcal{F} = \{A \rightarrow B,\ A \rightarrow C\}$}
+
+    \centering
+    \begin{tikzpicture}[
+        cl/.style  = {draw, rounded corners, minimum width=1.6cm, minimum height=0.6cm, font=\small, fill=gray!12},
+        ext/.style = {draw, rounded corners, minimum width=1.6cm, minimum height=0.6cm, font=\small, fill=red!18},
+        ar/.style  = {-{Stealth[length=1.8mm]}, semithick},
+        lbl/.style = {font=\footnotesize}
+    ]
+        \node[ext] (top) at (0,3)    {$\emptyset$};
+        \node[cl]  (B)   at (-1.4,2) {$\{B\}$};
+        \node[cl]  (C)   at (1.4,2)  {$\{C\}$};
+        \node[cl]  (BC)  at (0,1)    {$\{B,C\}$};
+        \node[ext] (bot) at (0,0)    {$\{A,B,C\}$};
+
+        \draw[ar] (bot) -- (BC);
+        \draw[ar] (BC)  -- (B);
+        \draw[ar] (BC)  -- (C);
+        \draw[ar] (B)   -- (top);
+        \draw[ar] (C)   -- (top);
+
+        \node[lbl, above=0.15cm of top] {$\top$ máximo $= [\mathrm{cl}_{\mathcal{F}}(\emptyset)]$};
+        \node[lbl, below=0.15cm of bot] {$\bot$ mínimo $= [\mathcal{U}]$};
+    \end{tikzpicture}
+    \vspace{0.3cm}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Dependencia Multivaluada No Trivial}
+    \framesubtitle{Definiciones}
+
+    Una dependencia multivaluada (MVD) $X \twoheadrightarrow Y$ es \textbf{no trivial} si cumple que:
+    \[ Y \not\subseteq X \quad \text{y} \quad X \cup Y \neq \mathcal{U} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Rectangularidad sobre un Determinante}
+    \framesubtitle{Definiciones}
+
+    Sea $\mathcal{U} = X \sqcup Y \sqcup Z$, y sea $R$ una instancia de relación sobre $\mathcal{U}$. 
+    
+    \vspace{0.3cm}
+    
+    Decimos que $R$ es \textbf{rectangular sobre el determinante} $X$ si para todo $x \in \pi_X(R)$, la fibra $R_x := \{(y,z) \mid (x,y,z) \in R\} \subseteq \mathrm{Dom}(Y) \times \mathrm{Dom}(Z)$ satisface:
+    \[ R_x = \pi_Y(R_x) \times \pi_Z(R_x) \]
+
+    \vspace{0.3cm}
+    
+    \textit{Equivalentemente (clausura bajo completación de rectángulos):} \\
+    Si $(x, y_1, z_1), (x, y_2, z_2) \in R$, entonces las tuplas mixtas también pertenecen a $R$:
+    \[ (x, y_1, z_2), (x, y_2, z_1) \in R \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Patrón Rectangular sobre un Ancla}
+    \framesubtitle{Definiciones}
+
+    Sea $x \in \mathbb{T}_{\mathcal{F}}$. Un \textbf{patrón rectangular sobre el ancla} $x$ consiste en nodos
+    \[ a_1, a_2, b_1, b_2, w_{11}, w_{12}, w_{21}, w_{22} \in \mathbb{T}_{\mathcal{F}} \]
+    para los cuales existen representantes
+    \[ X, A_1, A_2, B_1, B_2, W_{11}, W_{12}, W_{21}, W_{22} \subseteq \mathcal{U} \]
+    tales que:
+\end{frame}
+
+\begin{frame}
+    \frametitle{Patrón Rectangular sobre un Ancla}
+    \framesubtitle{Definiciones}
+
+    \begin{itemize}
+        \item[(i)] $[X] = x$, $[A_i] = a_i$, $[B_j] = b_j$, y $[W_{ij}] = w_{ij}$;
+        
+        \vspace{0.2cm}
+        
+        \item[(ii)] $X \subsetneq A_i \subseteq W_{ij} \quad \text{para todo } i, j \in \{1, 2\}$;
+        
+        \vspace{0.2cm}
+        
+        \item[(iii)] $X \subsetneq B_j \subseteq W_{ij} \quad \text{para todo } i, j \in \{1, 2\}$;
+        
+        \vspace{0.2cm}
+        
+        \item[(iv)] los nodos $a_1$ y $a_2$ son incomparables, y los nodos $b_1$ y $b_2$ son incomparables;
+        
+        \vspace{0.2cm}
+        
+        \item[(v)] para cada $i, j \in \{1, 2\}$, el nodo $w_{ij}$ se encuentra por encima tanto de $a_i$ como de $b_j$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Cuarta Forma Normal (4NF)}
+    \framesubtitle{Definiciones}
+
+    Sea $\Sigma$ un conjunto de dependencias (FDs y MVDs) sobre $\mathcal{U}$, y sea $\mathcal{F} \subseteq \Sigma$ el subconjunto de dependencias funcionales.
+    
+    \vspace{0.4cm}
+
+    Un esquema relacional $(\mathcal{U}, \Sigma)$ está en \textbf{Cuarta Forma Normal (4NF)} si para toda dependencia multivaluada $X \twoheadrightarrow Y$ (con $X, Y \subseteq \mathcal{U}$) tal que:
+    \[ \Sigma \vDash X \twoheadrightarrow Y \quad \text{y} \quad Y \not\subseteq X \quad \text{y} \quad X \cup Y \neq \mathcal{U} \]
+    el determinante $X$ es una \textbf{superclave}.
 \end{frame}
 
 \SlideBackCover{}
